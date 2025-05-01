@@ -8,6 +8,10 @@ public class EmailGeneratorApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(EmailGeneratorApplication.class, args);
+			
+	    
+		
+		
 	}
 
 }
