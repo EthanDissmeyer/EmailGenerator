@@ -1,34 +1,57 @@
-server/HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# === Angular / Node ===
+client/node_modules/
+client/dist/
+client/tmp/
+client/out-tsc/
+client/.angular/cache
+client/.sass-cache/
+client/coverage/
+client/npm-debug.log
+client/yarn-error.log
+client/.vscode/
+client/.idea/
 
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-.DS_Store
+# Optional: ignore lock file if you're not committing it
+client/package-lock.json
 
-### IntelliJ IDEA ###
-.idea
-*.iws
+# === Java / Spring Boot ===
+server/target/
+server/.classpath
+server/.project
+server/.settings/
+*.log
+*.class
+*.jar
+*.war
+hs_err_pid*
+
+# === Maven Wrapper ===
+server/.mvn/
+!**/maven-wrapper.jar
+
+# === IntelliJ IDEA ===
+.idea/
 *.iml
 *.ipr
+*.iws
+out/
 
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
+# === Visual Studio Code ===
 .vscode/
+.history/
+
+# === Docker ===
+pgdata/
+pgadmin_data/
+.env
+
+# === macOS / OS files ===
+.DS_Store
+Thumbs.db
+
+# === Misc ===
+*.swp
+*.swo
+*.tmp
+*.bak
+*.orig
