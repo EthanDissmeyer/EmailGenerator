@@ -10,6 +10,9 @@ client/npm-debug.log
 client/yarn-error.log
 client/.vscode/
 client/.idea/
+# === nodemodules ===
+/node_modules/
+
 
 # Optional: ignore lock file if you're not committing it
 client/package-lock.json
