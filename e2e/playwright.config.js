@@ -10,19 +10,18 @@ export default defineConfig({
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
-  reporter: 'html',
+  reporter: [['html', { outputFolder: 'playwright-report' }]],
 
   use: {
     trace: 'on-first-retry',
-    headless: false, // default, will still be overridden in project below
+    headless: true, 
   },
 
   projects: [
     {
       name: 'chromium',
       use: {
-        ...devices['Desktop Chrome'],
-        headless: false,         // explicitly run with visible browser
+        ...devices['Desktop Chrome'], 
       },
     },
   ],
