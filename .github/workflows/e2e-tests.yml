@@ -1,6 +1,7 @@
 name: E2E Tests
 
 on:
+  workflow_dispatch:
   push:
     branches: [main]
   pull_request:
@@ -11,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Set up Node.js
@@ -23,13 +24,10 @@ jobs:
         working-directory: ./e2e
         run: npm ci
 
+      - name: Install Playwright browsers
+        working-directory: ./e2e
+        run: npx playwright install --with-deps
+
       - name: Run Playwright tests
         working-directory: ./e2e
         run: npx playwright test
-
-    #   - name: Upload Playwright report
-    #     if: always()
-    #     uses: actions/upload-artifact@v3
-    #     with:
-    #       name: playwright-report
-    #       path: e2e/playwright-report
