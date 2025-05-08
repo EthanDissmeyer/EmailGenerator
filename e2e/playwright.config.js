@@ -14,15 +14,14 @@ export default defineConfig({
 
   use: {
     trace: 'on-first-retry',
-    headless: false, // default, will still be overridden in project below
+    headless: true, 
   },
 
   projects: [
     {
       name: 'chromium',
       use: {
-        ...devices['Desktop Chrome'],
-        headless: false,         // explicitly run with visible browser
+        ...devices['Desktop Chrome'], 
       },
     },
   ],
