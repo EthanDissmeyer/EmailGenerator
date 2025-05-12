@@ -1,0 +1,41 @@
+/* Center the dropdown in the container */
+div {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: left;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+
+/* Style the label */
+label {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+/* Style the dropdown */
+select {
+  width: 200px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Add hover and focus effects */
+select:hover {
+  border-color: #007bff;
+}
+
+select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
