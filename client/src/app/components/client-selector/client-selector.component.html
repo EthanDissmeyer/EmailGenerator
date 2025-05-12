@@ -1,7 +1,16 @@
-<br><br>
-<div>
-  <label for="client-select">Select Client:</label>
-  <select id="client-select" (change)="onClientSelect($event)">
-    <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}</option>
-  </select>
+<div class="dropdown">
+  <p>Client:</p>
+  <div class="dropdown-toggle" (click)="toggleOpen()">
+    {{ selectedClient()?.name || 'Select a client' }}
+  </div>
+
+  @if (isOpen()) {
+    <div class="dropdown-menu">
+      @for (client of clients; track trackByClientId) {
+        <div class="dropdown-item" (click)="selectClient(client)">
+          {{ client.name }}
+        </div>
+      }
+    </div>
+  }
 </div>

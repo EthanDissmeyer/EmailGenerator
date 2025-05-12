@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Import CommonModule
+import { Component, signal } from '@angular/core';
 
 
 @Component({
   selector: 'app-client-selector',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './client-selector.component.html',
   styleUrl: './client-selector.component.css'
 })
@@ -17,10 +16,26 @@ export class ClientSelectorComponent {
     { id: 3, name: 'Client C' }
   ];
 
-  // Placeholder function to handle client selection
-  onClientSelect(event: Event): void {
-    const selectedClientId = (event.target as HTMLSelectElement).value;
-    console.log(`Selected client ID: ${selectedClientId}`);
-    // TODO: Connect to the backend to fetch client-specific data
+  // Signal for dropdown open state
+  isOpen = signal(false);
+
+  // Signal for selected client
+  selectedClient = signal<{ id: number; name: string } | null>(null);
+
+  // Toggle dropdown open state
+  toggleOpen(): void {
+    this.isOpen.set(!this.isOpen());
+  }
+
+  // Select a client
+  selectClient(client: { id: number; name: string }): void {
+    this.selectedClient.set(client);
+    this.isOpen.set(false);
+    console.log(`Selected client: ${client.name}`);
+  }
+
+  // TrackBy function for clients
+  trackByClientId(index: number, client: { id: number; name: string }): number {
+    return client.id;
   }
 }
