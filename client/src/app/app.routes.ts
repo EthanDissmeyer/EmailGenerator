@@ -14,6 +14,6 @@ export const routes: Routes = [
         path: 'email-generator',
         component: EmailGeneratorComponent,
         title: 'Email Generator',
-    }
-
+    },
+   
 ];

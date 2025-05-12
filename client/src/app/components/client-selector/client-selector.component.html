@@ -1,1 +1,7 @@
-<p>client-selector works!</p>
+<br><br>
+<div>
+  <label for="client-select">Select Client:</label>
+  <select id="client-select" (change)="onClientSelect($event)">
+    <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}</option>
+  </select>
+</div>
