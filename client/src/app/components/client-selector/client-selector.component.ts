@@ -1,41 +1,58 @@
-import { Component, signal } from '@angular/core';
-
+// client-selector.component.ts
+import { Component, inject, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ClientService } from '../../services/client.service';
 
 @Component({
   selector: 'app-client-selector',
   standalone: true,
-  imports: [],
+  imports: [CommonModule], 
   templateUrl: './client-selector.component.html',
   styleUrl: './client-selector.component.css'
 })
 export class ClientSelectorComponent {
-  // Mock data for clients
-  clients = [
-    { id: 1, name: 'Client A' },
-    { id: 2, name: 'Client B' },
-    { id: 3, name: 'Client C' }
-  ];
+  private clientService = inject(ClientService);
 
-  // Signal for dropdown open state
+  clients = signal<any[]>([]);
   isOpen = signal(false);
+  selectedClient = signal<any | null>(null);
+  isSearching = signal(false);
+  searchQuery = signal('');
 
-  // Signal for selected client
-  selectedClient = signal<{ id: number; name: string } | null>(null);
-
-  // Toggle dropdown open state
-  toggleOpen(): void {
-    this.isOpen.set(!this.isOpen());
+  constructor() {
+    this.loadClients();
   }
 
-  // Select a client
-  selectClient(client: { id: number; name: string }): void {
+  private loadClients(): void {
+  this.clientService.getAllClients().subscribe(data => {
+    console.log('Clients loaded:', data);  
+    this.clients.set(data as any[]);
+  });
+}
+
+  searchClients(query: string): void {
+    this.searchQuery.set(query);
+
+    if (!query.trim()) {
+      this.isSearching.set(false);
+      this.loadClients();
+      return;
+    }
+    this.isSearching.set(true);
+    this.clientService.getClientBySearch(query)
+      .subscribe(data => this.clients.set(data as any[]));
+  }
+
+  toggleOpen(): void {
+    this.isOpen.update(v => !v);
+  }
+
+  selectClient(client: any): void {
     this.selectedClient.set(client);
     this.isOpen.set(false);
-    console.log(`Selected client: ${client.name}`);
   }
 
-  // TrackBy function for clients
-  trackByClientId(index: number, client: { id: number; name: string }): number {
+  trackByClientId(_i: number, client: any): number {
     return client.id;
   }
 }
