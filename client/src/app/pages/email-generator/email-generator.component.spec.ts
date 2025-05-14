@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { EmailGeneratorComponent } from './email-generator.component';
 
 describe('EmailGeneratorComponent', () => {
@@ -8,9 +9,12 @@ describe('EmailGeneratorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EmailGeneratorComponent]
-    })
-    .compileComponents();
+      imports: [EmailGeneratorComponent],
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting()
+      ]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(EmailGeneratorComponent);
     component = fixture.componentInstance;
