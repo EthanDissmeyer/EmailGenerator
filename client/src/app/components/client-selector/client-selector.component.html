@@ -1,14 +1,34 @@
 <div class="dropdown">
   <p>Client:</p>
   <div class="dropdown-toggle" (click)="toggleOpen()">
-    {{ selectedClient()?.name || 'Select a client' }}
+    {{ selectedClient() 
+      ? (selectedClient().name || selectedClient().firstName + ' ' + selectedClient().lastName) 
+      : 'Select a client' }}
   </div>
 
   @if (isOpen()) {
     <div class="dropdown-menu">
-      @for (client of clients; track trackByClientId) {
+      <!-- search box -->
+      <input
+        #searchBox
+        type="text"
+        (input)="searchClients(searchBox.value)"
+        placeholder="Type to filter clients…"
+        autocomplete="off"
+        class="dropdown-search"
+      />
+
+      <!-- original client list -->
+      @for (client of clients(); track client.clientId) {
         <div class="dropdown-item" (click)="selectClient(client)">
-          {{ client.name }}
+          {{ client.name || client.firstName + ' ' + client.lastName }}
+        </div>
+      }
+
+      <!--if the list is empty show no results-->
+      @if (clients().length === 0) {
+        <div class="dropdown-item disabled">
+          No results found.
         </div>
       }
     </div>
