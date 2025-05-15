@@ -1,11 +1,12 @@
 <main> <h1>Home</h1>
 
    <!-- Button to navigate to the email generator page -->
-  <button (click)="navigateToEmailGenerator()">Go to Email Generator</button>
+  <button (click)="navigateToEmailGenerator()">Go to Email Generator</button> <br>
   
   <!-- Back button to navigate to the previous page -->
+  
+  <router-outlet> </router-outlet> <br><br>
   <button (click)="goBack()">Back</button> <br>
-  <router-outlet> </router-outlet> 
 </main>
 
 
