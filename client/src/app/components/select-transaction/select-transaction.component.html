@@ -1,4 +1,5 @@
-<div class="search-container" #searchContainer>
+<div class="dropdown-box">
+    <div class="search-container" #searchContainer>
     <p>Select Transaction:</p>
     <input type="text" [(ngModel)]="searchTerm" (input)="onInputChange()" (focus)="onInputFocus()"
         placeholder="Enter transaction type..." class="search-input" />

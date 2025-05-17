@@ -36,3 +36,9 @@ button:hover {
 button:active {
   background-color: #003f7f; /* Even darker blue on click */
 }
+
+.input-row {
+  display: flex;
+  gap: 20px; 
+  align-items: flex-start;
+}
