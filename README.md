@@ -14,11 +14,16 @@ This repository is structured as a **monorepo** and includes the following compo
 
 ## Installation
 
-After cloning the repository, open a terminal in the root directory and run:
+After cloning the repository, ensure you have these downloaded:
+java 17, docker, nvm, node
+open a terminal in the root directory and run:
 
 ```bash
 npm run setup         # Recommended: for users using nvm (Node Version Manager)
-sudo npm run setup    # If your npm setup requires elevated permissions
+(or use) sudo npm run setup    # If your npm setup requires elevated permissions
+cd client
+sudo apt install ng-common
+npm install -g @angular/cli
 ```
 
 This script will install all required dependencies in the root, `client/`, and `e2e/` directories.
@@ -32,8 +37,9 @@ This script will install all required dependencies in the root, `client/`, and `
 Navigate to the `server/` directory and run:
 
 ```bash
-./mvnw clean
-./mvnw spring-boot:run
+./mvnw clean (cleans)
+./mvnw spring-boot:run (runs)
+./mvnw test (runs unit testing)
 ```
 
 - The backend service will be available at: `http://localhost:8080`
@@ -46,6 +52,7 @@ Navigate to the `client/` directory and run:
 
 ```bash
 ng serve
+ng test or npm run test (for testing)
 ```
 
 - The Angular app will be served at: `http://localhost:4200`
@@ -85,7 +92,10 @@ docker-compose up -d
 
    Replace `yourFeatureName` with a clear, relevant name based on your work.
 
-3. When your feature is complete and all unit tests pass, push the branch and open a pull request targeting `develop`.
+3. When your feature is complete and all unit tests pass:
+   push the branch via ``` git push origin feature/yourFeatureName ```
+   
+4. Go to github and open a pull request targeting `develop`.
 
 ---
 
