@@ -1,25 +1,28 @@
-/* client-selector.component.css */
-
 /* Container */
-.dropdown {
+.autocomplete {
   position: relative;
-  display: inline-block;
   width: 250px;
   font-family: Arial, sans-serif;
 }
 
-/* Toggle button */
-.dropdown-toggle {
+/* Search input field */
+.autocomplete-input {
+  width: 100%;
   padding: 8px 12px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: #fff;
-  cursor: pointer;
-  user-select: none;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
-/* Menu panel */
-.dropdown-menu {
+.autocomplete-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Dropdown list */
+.autocomplete-list {
   position: absolute;
   top: 100%;
   left: 0;
@@ -28,29 +31,27 @@
   padding: 0;
   border: 1px solid #ccc;
   border-radius: 4px;
-  background-color: #fff;
+  background: #fff;
   max-height: 200px;
   overflow-y: auto;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   z-index: 1000;
 }
 
-/* Search input */
-.dropdown-search {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 6px 8px;
-  border: none;
-  border-bottom: 1px solid #ddd;
-  outline: none;
-}
-
-/* Individual items */
-.dropdown-item {
+/* List item */
+.autocomplete-item {
   padding: 8px 12px;
   cursor: pointer;
+  transition: background-color 0.2s;
 }
 
-.dropdown-item:hover {
+/* Hover effect */
+.autocomplete-item:hover {
   background-color: #f0f0f0;
+}
+
+/* Disabled item */
+.autocomplete-item.disabled {
+  color: #aaa;
+  cursor: default;
 }

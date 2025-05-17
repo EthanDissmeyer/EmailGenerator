@@ -1,5 +1,5 @@
 // client-selector.component.ts
-import { Component, inject, signal } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ClientService } from '../../services/client.service';
 
@@ -12,6 +12,7 @@ import { ClientService } from '../../services/client.service';
 })
 export class ClientSelectorComponent {
   private clientService = inject(ClientService);
+  private hostElement = inject(ElementRef);
 
   clients = signal<any[]>([]);
   isOpen = signal(false);
@@ -48,11 +49,21 @@ export class ClientSelectorComponent {
   }
 
   selectClient(client: any): void {
+    const displayName = client.name || `${client.firstName} ${client.lastName}`;
+    this.searchQuery.set(displayName);
     this.selectedClient.set(client);
     this.isOpen.set(false);
   }
 
+
   trackByClientId(_i: number, client: any): number {
     return client.id;
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleOutsideClick(event: MouseEvent) {
+    if (!this.hostElement.nativeElement.contains(event.target)) {
+      this.isOpen.set(false);
+    }
   }
 }

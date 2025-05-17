@@ -14,7 +14,8 @@ test('select RedCorp from the dropdown', async({page}) => {
     const emailPage = new EmailGeneratorPage(page)
     await emailPage.goto()
 
-    await page.getByText('Select a client').click();
+    const input = page.getByPlaceholder('Select a client')
+    await input.click();
     await page.getByText('Red Corp').click();
-    await expect(page.getByText('Red Corp')).toBeVisible();
+    await expect(input).toHaveValue('Red Corp');
 });
