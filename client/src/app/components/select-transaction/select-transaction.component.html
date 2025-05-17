@@ -1,0 +1,15 @@
+<div class="search-container" #searchContainer>
+    <p>Select Transaction:</p>
+    <input type="text" [(ngModel)]="searchTerm" (input)="onInputChange()" (focus)="onInputFocus()"
+        placeholder="Enter transaction type..." class="search-input" />
+
+
+    <ul *ngIf="showDropdown" class="dropdown">
+        <li *ngFor="let type of filteredTransactions" (click)="selectTransaction(type)">
+            {{ type }}
+        </li>
+        <li *ngIf="filteredTransactions.length === 0" class="no-result">
+            No results found.
+        </li>
+    </ul>
+</div>
