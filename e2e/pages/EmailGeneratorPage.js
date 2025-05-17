@@ -1,12 +1,11 @@
 class EmailGeneratorPage {
-    /** 
+    /**
     * @param {import('@playwright/test').Page} page
     */
-
     constructor(page) {
         this.page = page;
-        this.emailGeneratorButton = page.getByRole('button', {name: 'Email Generator'});
-        this.homeButton = page.getByRole('button', {name: 'Home'});
+        this.emailGeneratorButton = page.getByRole('link', { name: 'Email Generator' });
+        this.homeButton = page.getByRole('link', { name: 'Home' });
     }
 
     async goto() {
@@ -14,4 +13,4 @@ class EmailGeneratorPage {
     }
 }
 
-module.exports = {EmailGeneratorPage};
+module.exports = { EmailGeneratorPage };

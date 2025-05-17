@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.dropdown-box {
+  background-color: rgb(188, 219, 245);
+  padding: 10px;
+  min-height: 300px; /* Adjust as needed to match dropdown size */
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.dropdown-box p {
+  text-align: center;
+}
