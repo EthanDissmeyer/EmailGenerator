@@ -1,4 +1,4 @@
-import { Component, HostListener, ElementRef, ViewChild } from '@angular/core';
+import { Component, HostListener, ElementRef, ViewChild, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -9,13 +9,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './select-transaction.component.html',
   styleUrl: './select-transaction.component.css'
 })
-
 export class SelectTransactionComponent {
   searchTerm = '';
-  dropdownOpen = false;
+  isOpen = signal(false);
 
-  // transaction types can be confirmed later with client
-  // also maybe put these into the database
   transactionTypes = [
     'New Customer',
     'Renewal',
@@ -38,30 +35,20 @@ export class SelectTransactionComponent {
     );
   }
 
-  get showDropdown(): boolean {
-    return this.dropdownOpen;
+  openDropdown(): void {
+    this.isOpen.set(true);
   }
 
-  // to use transaction type in another component (probably for templates):
-  // this.variablename = sessionStorage.getItem('selectedTransaction');
   selectTransaction(type: string): void {
-    this.dropdownOpen = false;
+    this.isOpen.set(false);
     this.searchTerm = type;
     sessionStorage.setItem('selectedTransaction', type);
-  }
-
-  onInputFocus(): void {
-    this.dropdownOpen = true;
-  }
-
-  onInputChange(): void {
-    this.dropdownOpen = this.searchTerm.trim().length > 0;
   }
 
   @HostListener('document:click', ['$event'])
   onClickOutside(event: Event) {
     if (!this.searchContainer.nativeElement.contains(event.target)) {
-      this.dropdownOpen = false;
+      this.isOpen.set(false);
     }
   }
 }

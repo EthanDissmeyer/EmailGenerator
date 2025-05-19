@@ -1,33 +1,34 @@
 <div class="dropdown-box">
+  <div class="autocomplete">
+    <p>Client:</p>
+    <input
+      type="text"
+      [value]="selectedClient() 
+                ? (selectedClient().name || selectedClient().firstName + ' ' + selectedClient().lastName) + ' ' + selectedClient().contactRef 
+                : searchQuery()"
+      (input)="searchClients($any($event.target).value)"
+      placeholder="Select a client"
+      autocomplete="off"
+      class="autocomplete-input"
+      (click)="openDropdown()"
+      (focus)="openDropdown()"
+    />
 
-<div class="autocomplete">
-  <p>Client:</p>
-  <input
-  type="text"
-  [value]="searchQuery()"
-  (input)="searchClients($any($event.target).value)"
-  placeholder="Select a client"
-  autocomplete="off"
-  class="autocomplete-input"
-  (click)="toggleOpen()"
-/>
- 
-
-  @if (isOpen() && clients().length > 0) {
-    <div class="autocomplete-list">
-      @for (client of clients(); track client.id) {
-        <div
-          class="autocomplete-item"
-          (click)="selectClient(client)"
-        >
-          {{ client.name || (client.firstName + ' ' + client.lastName) }}
-        </div>
-      }
-    </div>
-  } @else if (isOpen() && clients().length === 0) {
-    <div class="autocomplete-list">
-      <div class="autocomplete-item disabled">No results found.</div>
-    </div>
-  }
-</div>
+    @if (isOpen() && clients().length > 0) {
+      <div class="autocomplete-list">
+        @for (client of clients(); track client.id) {
+          <div
+            class="autocomplete-item"
+            (click)="selectClient(client)"
+          >
+            {{ client.name || (client.firstName + ' ' + client.lastName) }} {{ client.contactRef }}
+          </div>
+        }
+      </div>
+    } @else if (isOpen() && clients().length === 0) {
+      <div class="autocomplete-list">
+        <div class="autocomplete-item disabled">No results found.</div>
+      </div>
+    }
+  </div>
 </div>
