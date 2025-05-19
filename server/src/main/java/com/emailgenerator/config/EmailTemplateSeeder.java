@@ -27,7 +27,7 @@ public class EmailTemplateSeeder {
         EmailTemplate template = new EmailTemplate();
         template.setName("New Business Nature and Scope");
         template.setSubject("Our next steps for your Insurance Cover");
-        template.setTransactionType("new customer");
+        template.setTransactionType("New Customer");
 
         String body = """
             It was great to speak to/meet you today/yesterday/date to discuss your insurance needs. We believe in creating a fantastic client experience and will work tirelessly to provide personal service and quality advice for you.
