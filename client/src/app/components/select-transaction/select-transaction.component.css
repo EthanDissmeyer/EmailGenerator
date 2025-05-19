@@ -1,61 +1,69 @@
 /* Container */
-.search-container {
-  width: 250px; /* Match autocomplete */
+.autocomplete {
   position: relative;
+  width: 250px;
   font-family: Arial, sans-serif;
   border-radius: 4px;
   box-sizing: border-box;
 }
 
-/* Text inside search bar */
-.search-input {
+/* Search input field */
+.autocomplete-input {
   width: 100%;
-  padding: 8px 12px; /* Match autocomplete */
+  padding: 8px 12px;
   font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
   outline: none;
   transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  background-color: #fff;
 }
 
-.search-input:focus {
+.autocomplete-input:focus {
   border-color: #007bff;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
-/* Dropdown menu */
-.dropdown {
+/* Dropdown list */
+.autocomplete-list {
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
-  background: white;
+  margin-top: 4px;
+  padding: 0;
   border: 1px solid #ccc;
-  border-radius: 4px; /* Match autocomplete */
+  border-radius: 4px;
+  background: #fff;
   max-height: 200px;
   overflow-y: auto;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Match autocomplete */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   z-index: 1000;
+  list-style: none;
 }
 
-/* Dropdown menu list */
-.dropdown li {
-  padding: 8px 12px; /* Match autocomplete */
+/* List items */
+.autocomplete-item {
+  padding: 8px 12px;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
-/* Hover effect */
-.dropdown li:hover {
+/* Hover effect on items */
+.autocomplete-item:hover {
   background-color: #f0f0f0;
 }
 
-/* No result text */
+/* Disabled state */
+.autocomplete-item.disabled {
+  color: #aaa;
+  cursor: default;
+}
+
+/* Optional no result message */
 .no-result {
   color: gray;
   font-style: italic;
+  padding: 8px 12px;
 }

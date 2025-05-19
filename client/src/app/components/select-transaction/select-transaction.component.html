@@ -1,16 +1,28 @@
 <div class="dropdown-box">
-    <div class="search-container" #searchContainer>
-    <p>Select Transaction:</p>
-    <input type="text" [(ngModel)]="searchTerm" (input)="onInputChange()" (focus)="onInputFocus()"
-        placeholder="Enter transaction type..." class="search-input" />
+  <div class="autocomplete" #searchContainer>
+    <p>Transaction Type:</p>
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Enter transaction type..."
+      autocomplete="off"
+      class="autocomplete-input"
+      (focus)="openDropdown()"
+      (input)="openDropdown()"
+    />
 
-
-    <ul *ngIf="showDropdown" class="dropdown">
-        <li *ngFor="let type of filteredTransactions" (click)="selectTransaction(type)">
+    @if (isOpen() && filteredTransactions.length > 0) {
+      <div class="autocomplete-list">
+        @for (type of filteredTransactions; track type) {
+          <div class="autocomplete-item" (click)="selectTransaction(type)">
             {{ type }}
-        </li>
-        <li *ngIf="filteredTransactions.length === 0" class="no-result">
-            No results found.
-        </li>
-    </ul>
+          </div>
+        }
+      </div>
+    } @else if (isOpen() && filteredTransactions.length === 0) {
+      <div class="autocomplete-list">
+        <div class="autocomplete-item disabled">No results found.</div>
+      </div>
+    }
+  </div>
 </div>
