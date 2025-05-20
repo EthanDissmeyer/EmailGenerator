@@ -1,0 +1,36 @@
+<div class="dropdown-box">
+  <div class="dropdown-container" #searchContainer>
+    <p>Select Template:</p>
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Enter template name..."
+      autocomplete="off"
+      class="search-input"
+      (focus)="openDropdown()"
+      (input)="openDropdown()"
+    />
+
+    <div class="dropdown-list" *ngIf="isOpen() && filteredTemplates.length > 0">
+      <div
+        class="dropdown-item"
+        *ngFor="let template of filteredTemplates"
+        (click)="selectTemplate(template)"
+      >
+        {{ template.name }}
+      </div>
+    </div>
+
+    <div class="dropdown-list" *ngIf="isOpen() && filteredTemplates.length === 0">
+      <div class="dropdown-item disabled">No results found.</div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showModal()" class="modal-backdrop" (click)="closeModal()">
+  <div class="modal-content" (click)="stopPropagation($event)">
+    <h3>{{ selectedTemplate.subject }}</h3>
+    <p><strong>Transaction Type:</strong> {{ selectedTemplate.transactionType }}</p>
+    <pre style="white-space: pre-wrap;">{{ selectedTemplate.body }}</pre>
+  </div>
+</div>
