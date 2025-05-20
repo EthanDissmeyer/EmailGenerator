@@ -1,7 +1,8 @@
-import { Component, ElementRef, ViewChild, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {Component, ElementRef, ViewChild, signal, effect, inject, HostListener} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { SelectTemplateService } from '../../services/select-template.service';
+import { TransactionTypeService } from '../../services/transaction-type.service';
 
 @Component({
   selector: 'app-select-template',
@@ -18,20 +19,33 @@ export class SelectTemplateComponent {
   templates: any[] = [];
   selectedTemplate: any = null;
 
-  constructor(private templateService: SelectTemplateService) {}
+  private templateService = inject(SelectTemplateService);
+  private txService = inject(TransactionTypeService);
 
-  ngOnInit() {
-    this.templateService.getTemplates().subscribe((data: any[]) => {
-      this.templates = data;
+  constructor() {
+    // gets the templates when txn type changes or on load
+    effect(() => {
+      const type = this.txService.selectedType();
+      console.log('Selected transaction type:', type);
+
+      const fetch$ = type
+        ? this.templateService.getTemplatesByTransactionType(type)
+        : this.templateService.getTemplates();
+
+      fetch$.subscribe((data: any[]) => {
+        console.log('Fetched templates:', data);
+        this.templates = data;
+        this.searchTerm = ''; 
+        this.selectedTemplate = null; 
+      });
     });
   }
 
-  get filteredTemplates() {
+  get filteredTemplates(): any[] {
     const term = this.searchTerm.toLowerCase().trim();
-    if (!term) return this.templates;
-    return this.templates.filter(template =>
-      template.name.toLowerCase().includes(term)
-    );
+    return term
+      ? this.templates.filter(t => t.name.toLowerCase().includes(term))
+      : this.templates;
   }
 
   openDropdown(): void {
@@ -40,6 +54,7 @@ export class SelectTemplateComponent {
 
   selectTemplate(template: any): void {
     this.selectedTemplate = template;
+    this.searchTerm = template.name; 
     this.isOpen.set(false);
   }
 
@@ -53,5 +68,12 @@ export class SelectTemplateComponent {
 
   showModal(): boolean {
     return !!this.selectedTemplate;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClickOutside(event: Event): void {
+    if (!this.searchContainer.nativeElement.contains(event.target)) {
+      this.isOpen.set(false);
+    }
   }
 }

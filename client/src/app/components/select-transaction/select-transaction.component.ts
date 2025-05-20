@@ -1,6 +1,7 @@
 import { Component, HostListener, ElementRef, ViewChild, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { TransactionTypeService } from '../../services/transaction-type.service';
 
 @Component({
   selector: 'app-select-transaction',
@@ -10,29 +11,26 @@ import { CommonModule } from '@angular/common';
   styleUrl: './select-transaction.component.css'
 })
 export class SelectTransactionComponent {
+  @ViewChild('searchContainer') searchContainer!: ElementRef;
   searchTerm = '';
   isOpen = signal(false);
 
   transactionTypes = [
-    'New Customer',
-    'Renewal',
-    'Cancellations',
-    'Premiums',
-    'Policy Changes',
-    'Claims',
-    'Commissions',
+    'New Client',
+    'Endorsement',
     'Quotes',
-    'Invoices'
+    'Proposal Reminder',
+    'Renewal',
+    'Confirmation Email'
   ];
 
-  @ViewChild('searchContainer') searchContainer!: ElementRef;
+  constructor(private txService: TransactionTypeService) {}
 
   get filteredTransactions() {
     const term = this.searchTerm.toLowerCase().trim();
-    if (!term) return this.transactionTypes;
-    return this.transactionTypes.filter(type =>
-      type.toLowerCase().includes(term)
-    );
+    return term
+      ? this.transactionTypes.filter(t => t.toLowerCase().includes(term))
+      : this.transactionTypes;
   }
 
   openDropdown(): void {
@@ -40,13 +38,13 @@ export class SelectTransactionComponent {
   }
 
   selectTransaction(type: string): void {
-    this.isOpen.set(false);
     this.searchTerm = type;
-    sessionStorage.setItem('selectedTransaction', type);
+    this.txService.selectedType.set(type);
+    this.isOpen.set(false);
   }
 
   @HostListener('document:click', ['$event'])
-  onClickOutside(event: Event) {
+  onClickOutside(event: Event): void {
     if (!this.searchContainer.nativeElement.contains(event.target)) {
       this.isOpen.set(false);
     }

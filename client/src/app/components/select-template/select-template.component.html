@@ -11,26 +11,31 @@
       (input)="openDropdown()"
     />
 
-    <div class="dropdown-list" *ngIf="isOpen() && filteredTemplates.length > 0">
-      <div
-        class="dropdown-item"
-        *ngFor="let template of filteredTemplates"
-        (click)="selectTemplate(template)"
-      >
-        {{ template.name }}
+    @if (isOpen() && filteredTemplates.length > 0) {
+      <div class="dropdown-list">
+        @for (template of filteredTemplates; track template.name) {
+          <div
+            class="dropdown-item"
+            (click)="selectTemplate(template)"
+          >
+            {{ template.name }}
+          </div>
+        }
       </div>
-    </div>
-
-    <div class="dropdown-list" *ngIf="isOpen() && filteredTemplates.length === 0">
-      <div class="dropdown-item disabled">No results found.</div>
-    </div>
+    } @else if (isOpen() && filteredTemplates.length === 0) {
+      <div class="dropdown-list">
+        <div class="dropdown-item disabled">No results found.</div>
+      </div>
+    }
   </div>
 </div>
 
-<div *ngIf="showModal()" class="modal-backdrop" (click)="closeModal()">
-  <div class="modal-content" (click)="stopPropagation($event)">
-    <h3>{{ selectedTemplate.subject }}</h3>
-    <p><strong>Transaction Type:</strong> {{ selectedTemplate.transactionType }}</p>
-    <pre style="white-space: pre-wrap;">{{ selectedTemplate.body }}</pre>
+@if (showModal()) {
+  <div class="modal-backdrop" (click)="closeModal()">
+    <div class="modal-content" (click)="stopPropagation($event)">
+      <h3>{{ selectedTemplate.subject }}</h3>
+      <p><strong>Transaction Type:</strong> {{ selectedTemplate.transactionType }}</p>
+      <pre style="white-space: pre-wrap;">{{ selectedTemplate.body }}</pre>
+    </div>
   </div>
-</div>
+}
