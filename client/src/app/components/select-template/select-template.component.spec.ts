@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SelectTemplateComponent } from './select-template.component';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('SelectTemplateComponent', () => {
   let component: SelectTemplateComponent;
@@ -8,9 +8,9 @@ describe('SelectTemplateComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SelectTemplateComponent]
-    })
-    .compileComponents();
+      imports: [SelectTemplateComponent],
+      providers: [provideHttpClientTesting()]
+    }).compileComponents();
 
     fixture = TestBed.createComponent(SelectTemplateComponent);
     component = fixture.componentInstance;
