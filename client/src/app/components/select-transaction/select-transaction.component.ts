@@ -35,6 +35,10 @@ export class SelectTransactionComponent {
 
   openDropdown(): void {
     this.isOpen.set(true);
+    //if the user clears the search, show all email templates
+    if (this.searchTerm.trim() === '') {
+    this.txService.selectedType.set('');
+    }
   }
 
   selectTransaction(type: string): void {

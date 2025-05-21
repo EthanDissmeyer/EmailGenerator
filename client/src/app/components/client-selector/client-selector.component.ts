@@ -30,7 +30,8 @@ export class ClientSelectorComponent {
   }
 
   searchClients(query: string): void {
-    this.searchQuery.set(query);
+    const trimmed = query.trim();
+    this.searchQuery.set(trimmed);
 
     if (!query.trim()) {
       this.isSearching.set(false);

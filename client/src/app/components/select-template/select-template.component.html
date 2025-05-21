@@ -1,10 +1,10 @@
 <div class="dropdown-box">
   <div class="dropdown-container" #searchContainer>
-    <p>Select Template:</p>
+    <p class="dropdown-title">Template:</p>
     <input
       type="text"
       [(ngModel)]="searchTerm"
-      placeholder="Enter template name..."
+      placeholder="Enter template name"
       autocomplete="off"
       class="search-input"
       (focus)="openDropdown()"

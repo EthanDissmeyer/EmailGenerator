@@ -36,3 +36,10 @@ button:hover {
 button:active {
   background-color: #003f7f; /* Even darker blue on click */
 }
+
+.tobeadded{
+  font-size: 2em;
+  position: relative;
+  margin-top: -20vh;
+  text-align: center;
+}

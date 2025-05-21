@@ -1,10 +1,10 @@
 <div class="dropdown-box">
   <div class="autocomplete" #searchContainer>
-    <p>Transaction Type:</p>
+    <p class="dropdown-title">Transaction Type:</p>
     <input
       type="text"
       [(ngModel)]="searchTerm"
-      placeholder="Enter transaction type..."
+      placeholder="Enter transaction type"
       autocomplete="off"
       class="autocomplete-input"
       (focus)="openDropdown()"
