@@ -6,13 +6,25 @@ html, body {
 }
 
 .dropdown-box {
-  background-color: rgb(188, 219, 245);
+  background-color: rgb(123, 188, 240);
   padding: 10px;
-  min-height: 300px; /* Adjust as needed to match dropdown size */
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  min-height: 450px; /* Adjust as needed to match dropdown size */
+  min-width: 350px;
+  border-radius: 10px;
+  border: 3px solid #ccc;
 }
 
-.dropdown-box p {
+.dropdown-title {
+  color: rgb(255, 255, 255);
   text-align: center;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.25em;
+}
+
+.autocomplete {
+  position: relative;
+  width: 350;
+  font-family: Arial, sans-serif;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
